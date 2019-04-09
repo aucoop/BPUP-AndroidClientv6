@@ -11,6 +11,7 @@
 package org.openmrs.mobile.activities.formdisplay;
 
 import android.annotation.TargetApi;
+import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
@@ -42,6 +43,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -95,6 +97,8 @@ public class FormDisplayPageFragment extends ACBaseFragment<FormDisplayContract.
     long mPatientID;
     Gps gps;
     private static final int MAX_MEASUREMENTS = 3;
+    private Dialog treatmentDialog;
+    private Button closeTreatmentDialogButton;
 
     public static FormDisplayPageFragment newInstance() {
         return new FormDisplayPageFragment();
@@ -448,6 +452,7 @@ public class FormDisplayPageFragment extends ACBaseFragment<FormDisplayContract.
                                             bluetoothButton.setEnabled(false);
                                             bluetoothButton.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.dsb_disabled_color));
 
+                                        showTreatmentDialog();
                                     }
                                 });
                             }
@@ -845,6 +850,36 @@ public class FormDisplayPageFragment extends ACBaseFragment<FormDisplayContract.
         mNotifyMgr.notify(1, mBuilder.build());
 
     }
+
+
+    public void showTreatmentDialog(){
+
+        treatmentDialog = new Dialog(getActivity());
+        treatmentDialog.setContentView(R.layout.treatmentdialog);
+        treatmentDialog.setTitle("Treatment Dialog");
+
+        closeTreatmentDialogButton = (Button)treatmentDialog.findViewById(R.id.closeTreatmentDialog);
+        closeTreatmentDialogButton.setEnabled(true);
+
+        closeTreatmentDialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                treatmentDialog.cancel();
+            }
+        });
+
+        ImageView treatmentFace = (ImageView) treatmentDialog.findViewById(R.id.treatmentImageFace);
+
+
+        int imageResource = getResources().getIdentifier("@drawable/green_face_treatment", null, getActivity().getPackageName());
+
+
+        treatmentFace.setImageResource(imageResource);
+
+        treatmentDialog.show();
+    }
+
+
 
 
 }
