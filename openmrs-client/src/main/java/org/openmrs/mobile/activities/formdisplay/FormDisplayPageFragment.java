@@ -97,8 +97,12 @@ public class FormDisplayPageFragment extends ACBaseFragment<FormDisplayContract.
     long mPatientID;
     Gps gps;
     private static final int MAX_MEASUREMENTS = 3;
-    private Dialog treatmentDialog;
-    private Button closeTreatmentDialogButton;
+    private Dialog mTreatmentDialog;
+    private Button mCloseTreatmentDialogButton;
+    private Button msendTreatmentDialogButton;
+    private EditText mrecomendationET;
+    private TextView mInformationTreatmentDialogTextView;
+    private TextView mRecomendationDialogTextView;
 
     public static FormDisplayPageFragment newInstance() {
         return new FormDisplayPageFragment();
@@ -452,7 +456,10 @@ public class FormDisplayPageFragment extends ACBaseFragment<FormDisplayContract.
                                             bluetoothButton.setEnabled(false);
                                             bluetoothButton.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.dsb_disabled_color));
 
-                                        showTreatmentDialog();
+                                        //mSystolic = 160;
+                                        //mDiastolic = 96;
+
+                                        showTreatmentDialog((float)mSystolic, (float)mDiastolic);
                                     }
                                 });
                             }
@@ -851,37 +858,73 @@ public class FormDisplayPageFragment extends ACBaseFragment<FormDisplayContract.
 
     }
 
+    public void showTreatmentDialog(float systolic, float diastolic){
+        mTreatmentDialog = new Dialog(getActivity());
+        mTreatmentDialog.setContentView(R.layout.treatmentdialog);
+        mTreatmentDialog.setTitle("Treatment Dialog");
 
-    public void showTreatmentDialog(){
+        mCloseTreatmentDialogButton = (Button) mTreatmentDialog.findViewById(R.id.closeTreatmentDialogButton);
+        mCloseTreatmentDialogButton.setEnabled(true);
 
-        treatmentDialog = new Dialog(getActivity());
-        treatmentDialog.setContentView(R.layout.treatmentdialog);
-        treatmentDialog.setTitle("Treatment Dialog");
+        msendTreatmentDialogButton = (Button) mTreatmentDialog.findViewById(R.id.sendTreatmentDialogButton);
+        msendTreatmentDialogButton.setEnabled(true);
 
-        closeTreatmentDialogButton = (Button)treatmentDialog.findViewById(R.id.closeTreatmentDialog);
-        closeTreatmentDialogButton.setEnabled(true);
+        mrecomendationET = (EditText) mTreatmentDialog.findViewById(R.id.messageDialogET);
 
-        closeTreatmentDialogButton.setOnClickListener(new View.OnClickListener() {
+        mCloseTreatmentDialogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                treatmentDialog.cancel();
+                mTreatmentDialog.cancel();
             }
         });
 
-        ImageView treatmentFace = (ImageView) treatmentDialog.findViewById(R.id.treatmentImageFace);
+        msendTreatmentDialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                Log.d("SendOnClick", "He pulsado enviar" );
+
+                mTreatmentDialog.cancel();
+                Toast.makeText(mTreatmentDialog.getContext(),"Message sent to the doctor",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        ImageView treatmentFace = (ImageView) mTreatmentDialog.findViewById(R.id.treatmentDialogImageFace);
+        String imageToShow = " ";
+
+        mInformationTreatmentDialogTextView = (TextView) mTreatmentDialog.findViewById(R.id.informationTreatmentDialogTextView);
+
+        mRecomendationDialogTextView = (TextView) mTreatmentDialog.findViewById(R.id.recomendationDialogTV);
 
 
-        int imageResource = getResources().getIdentifier("@drawable/green_face_treatment", null, getActivity().getPackageName());
+        //systolic = 150;
+        //diastolic = 100;
 
+        if(systolic <= 120.0 || diastolic <= 80.0) {
+            imageToShow = "@drawable/green_face_treatment";
+            mInformationTreatmentDialogTextView.setText("You're fine, but here you have some personalized " +
+                    "recomendations:");
+            mRecomendationDialogTextView.setText("A 10% Weight Reduction");
 
-        treatmentFace.setImageResource(imageResource);
+        }
 
-        treatmentDialog.show();
+        else if((systolic >= 120.0 && systolic <=139.0) || (diastolic >= 80.0 && diastolic <= 89.0)){
+            imageToShow = "@drawable/yellow_face_treatment";
+            mInformationTreatmentDialogTextView.setText("We strongly recommend that you follow these" +
+                    " personalized instructions listed below");
+            mRecomendationDialogTextView.setText("A 20% Weight Reduction");
+
+        }
+
+        else if (systolic >= 140.0 || diastolic <= 90.0){
+            imageToShow = "@drawable/red_face_treatment";
+            mInformationTreatmentDialogTextView.setText("We strongly recommend that you follow these" +
+                    " personalized instructions listed below");
+            mRecomendationDialogTextView.setText("A 30% Weight Reduction");
+        }
+
+        treatmentFace.setImageResource(getResources().getIdentifier(imageToShow, null, getActivity().getPackageName()));
+        mTreatmentDialog.show();
     }
-
-
-
-
 }
 
 

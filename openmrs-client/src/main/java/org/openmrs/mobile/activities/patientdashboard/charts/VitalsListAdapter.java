@@ -178,7 +178,7 @@ public class VitalsListAdapter extends BaseExpandableListAdapter {
 
                     YAxis leftAxis = chart.getAxisLeft();
 
-                    LimitLine sysLimitLine = new LimitLine(130f, "Critical Systolic Level");
+                    LimitLine sysLimitLine = new LimitLine(140f, "Critical Systolic Level");
                     sysLimitLine.setLineColor(Color.RED);
                     sysLimitLine.setLineWidth(2f);
                     sysLimitLine.setTextColor(Color.BLACK);

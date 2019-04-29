@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:orientation="vertical"
+    android:layout_width="400dp"
+    android:layout_height="400dp">
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/treatmentDialogImageFace"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:contentDescription="@string/app_name"
+        />
+
+    <TextView
+        android:id="@+id/informationTreatmentDialogTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/treatmentDialogImageFace"
+        android:layout_centerInParent="true"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="-53dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/recomendationDialogTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/informationTreatmentDialogTextView"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="-36dp"
+        android:textStyle="bold"
+        android:layout_centerVertical="true"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/messageDialogET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/recomendationDialogTV"
+        android:layout_marginBottom="-82dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:hint="Leave here some message that you think may be decisive for the diagnosis"
+        android:textSize="14sp" />
+
+
+    <Button
+        android:id="@+id/closeTreatmentDialogButton"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/sendTreatmentDialogButton"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginLeft="-118dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="6dp"
+        android:text="Close"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/sendTreatmentDialogButton"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="19dp"
+        android:layout_marginBottom="8dp"
+        android:text="SEND MSG"
+        android:textStyle="bold" />
+
+</RelativeLayout>
