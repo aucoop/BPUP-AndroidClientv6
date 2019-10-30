@@ -32,4 +32,12 @@
             android:layout_below="@+id/onButton"
             />
 
+        <Button
+            android:id="@+id/discoverButton"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="BLUETOOTH OFF"
+            android:layout_below="@+id/offButton"
+            />
+
 </RelativeLayout>
