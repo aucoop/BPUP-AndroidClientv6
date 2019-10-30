@@ -36,8 +36,19 @@
             android:id="@+id/discoverButton"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="BLUETOOTH OFF"
+            android:text="DISCOVER"
             android:layout_below="@+id/offButton"
             />
+
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/devicesListView"
+            android:choiceMode="singleChoice"
+            android:layout_below="@+id/discoverButton"
+            android:layout_alignRight="@+id/offButton"
+            android:layout_alignEnd="@+id/offButton" />
+
 
 </RelativeLayout>
