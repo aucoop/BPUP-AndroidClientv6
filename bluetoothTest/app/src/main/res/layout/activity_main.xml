@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
@@ -7,8 +7,9 @@
     android:orientation="horizontal"
     android:gravity="center">
 
+
         <Button
-            android:id="@+id/scanButton"
+            android:id="@+id/onButton"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="BLUETOOTH ON"
@@ -16,10 +17,19 @@
 
 
         <TextView
-            android:id="@+id/bluetoothStatus"
+            android:id="@+id/bluetoothOnStatus"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="Blueooth Device Name"
+            android:layout_toRightOf="@+id/onButton"
             />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/offButton"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="BLUETOOTH OFF"
+            android:layout_below="@+id/onButton"
+            />
+
+</RelativeLayout>

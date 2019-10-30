@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
     private BluetoothAdapter mBTAdapter;
     private TextView mBluetoothStatus;
-    private Button mScanButton;
-
+    private Button mOnButton;
+    private Button mOffButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +32,21 @@ public class MainActivity extends AppCompatActivity {
 
         mBTAdapter = BluetoothAdapter.getDefaultAdapter(); // get a handle on the bluetooth radio
 
+        mBluetoothStatus = (TextView)findViewById(R.id.bluetoothOnStatus);
+        mOnButton = (Button)findViewById(R.id.onButton);
+        mOffButton = (Button)findViewById(R.id.offButton);
 
-        mBluetoothStatus = (TextView)findViewById(R.id.bluetoothStatus);
-        mScanButton = (Button)findViewById(R.id.scanButton);
-
-        mScanButton.setOnClickListener(new View.OnClickListener() {
+        mOnButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
               bluetoothOn(v);
             }
         });
+        mOffButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                bluetoothOff(v);
+            }
+        });
+
 
      }
 
@@ -57,4 +63,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void bluetoothOff(View view){
+        mBTAdapter.disable(); // turn off
+        mBluetoothStatus.setText("Bluetooth disabled");
+        Toast.makeText(getApplicationContext(),"Bluetooth turned Off", Toast.LENGTH_SHORT).show();
+    }
 }
