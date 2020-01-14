@@ -71,6 +71,8 @@ public interface BleWrapperUiCallbacks {
 	public void uiNewValuePressForCharacteristic(BluetoothGatt gatt, BluetoothDevice device,
 												 BluetoothGattService service, int systolic, int diastolic, int hr);
 
+	public void uiNewValueWeightForCharacteristic(float weight);
+
 	/* define Null Adapter class for that interface */
 	public static class Null implements BleWrapperUiCallbacks {
 		@Override
@@ -141,6 +143,11 @@ public interface BleWrapperUiCallbacks {
 													 int diastolic, int hr) {
 
 		}
+
+		@Override
+		public void uiNewValueWeightForCharacteristic(float weight){
+
+        }
 
 		@Override
 		public void uiDeviceFound(BluetoothDevice device, int rssi, byte[] record) {

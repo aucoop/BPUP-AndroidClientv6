@@ -188,6 +188,12 @@ public class SettingsFragment extends ACBaseFragment<SettingsContract.Presenter>
                 }
 
                 @Override
+                public void uiNewValueWeightForCharacteristic(float weight) {
+
+                }
+
+
+                @Override
                 public void uiGotNotification(BluetoothGatt gatt, BluetoothDevice device, BluetoothGattService service, BluetoothGattCharacteristic characteristic) {
 
                 }

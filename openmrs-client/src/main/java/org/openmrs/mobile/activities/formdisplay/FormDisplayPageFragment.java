@@ -86,11 +86,11 @@ public class FormDisplayPageFragment extends ACBaseFragment<FormDisplayContract.
     ProgressDialog mPDialog;
     BleWrapper mBleWrapper;
     private static final String TAG_CLASS = "FDispPageFrag.java";
-    private RangeEditText mEditTextSystolic;
-    private RangeEditText mEditTextDiastolic, mEditTextPulseRate;
+    private RangeEditText mEditTextSystolic, mEditTextDiastolic, mEditTextPulseRate ,mEditTextWeight;
     private TextView mTxtView;
     private ArrayList<Integer> mListSystolic, mListDiastolic, mListPulse;
     int mDiastolic, mSystolic, mPulse;
+    float mWeight;
     private Context mContext;
     private RangeEditText mLatitude;
     private RangeEditText mLongitude;
@@ -120,7 +120,6 @@ public class FormDisplayPageFragment extends ACBaseFragment<FormDisplayContract.
         mListSystolic = new ArrayList<>();
         mListPulse = new ArrayList<>();
         mContext = super.getContext();
-        // notifyTreatment();
         return root;
     }
 
@@ -222,7 +221,8 @@ public class FormDisplayPageFragment extends ACBaseFragment<FormDisplayContract.
 
 
             if (question.getLabel().contentEquals("Height(cm):") || question.getLabel().contentEquals("Weight(Kg):"))
-                ed.addTextChangedListener(new TextWatcher() {
+                mEditTextWeight = ed;
+                mEditTextWeight.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -420,6 +420,21 @@ public class FormDisplayPageFragment extends ACBaseFragment<FormDisplayContract.
 
                         }
 
+
+                        public void uiNewValueWeightForCharacteristic(float weight){
+                            Log.d(TAG_CLASS, "uiNewValueWeightForCharacteristic");
+                            mPDialog.dismiss();
+                            Log.d(TAG_CLASS, "ui weight: " + weight);
+                            mWeight = weight;
+
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mEditTextWeight.setText(String.valueOf(mWeight));
+                                }
+                            });
+                        }
+
                         @Override
                         public void uiNewValuePressForCharacteristic(BluetoothGatt gatt, BluetoothDevice device, BluetoothGattService service, int systolic, int diastolic, int hr) {
                             Log.d(TAG_CLASS, "uiNewValuePressForCharacteristic");
@@ -464,8 +479,6 @@ public class FormDisplayPageFragment extends ACBaseFragment<FormDisplayContract.
                                 });
                             }
                         }
-
-
                     });
 
                     if (mBleWrapper.initialize()) {

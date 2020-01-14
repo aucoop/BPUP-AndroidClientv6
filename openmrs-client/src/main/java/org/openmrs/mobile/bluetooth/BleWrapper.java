@@ -440,6 +440,15 @@ public class BleWrapper {
             mUiCallback.uiNewValuePressForCharacteristic(mBluetoothGatt, mBluetoothDevice,
                     mBluetoothSelectedService,systolic,diastolic,hr);
         }
+
+        // TODO: Funcio Mendes
+
+//         else if(uuid.equals(BleDefinedUUIDs.Characteristic.BASCULA)){
+//            Log.d(TAG,"WEIGHT NEW DATA");
+//            float pes = getPes;
+//            mUiCallback.uiNewValueWeightForCharacteristic(pes);
+//         }
+
         else{
             Log.d(TAG,"PRESS unknown charact");
 
